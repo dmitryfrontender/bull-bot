@@ -1,0 +1,12 @@
+// @import 'reset';
+// @import 'media';
+// @import 'global';
+// @import 'icons';
+
+.main {
+    width: 100%;
+    height: 100vh;
+    overflow: auto;
+}
+
+@import 'plug';
