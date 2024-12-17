@@ -8,6 +8,76 @@
 
 
 .footer {
-    height: 1px;
-    display: table-row;
+  height: 1px;
+  display: table-row;
+
+  &-menu {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 2;
+    width: 100%;
+    height: 120px;
+    padding: 25px 0;
+    backdrop-filter: blur(4px);
+    background: linear-gradient(135deg, rgba(5, 9, 8, 0.9) 0%, rgba(0, 0, 0, 0.9) 100%);
   }
+
+  &-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    width: 33.3%;
+    font-weight: 500;
+    font-size: 12px;
+    color: #8C8B9E;
+
+    &.active {
+      color: #02FEA9;
+
+      .footer-icon {
+        fill: #02FEA9;
+
+        &-wrapper:after {
+          opacity: 1;
+        }
+
+        path {
+          box-shadow: 0 -6px 44px 0 #01fea9;
+        }
+      }
+    }
+  }
+
+  &-icon {
+    width: 30px;
+    height: 30px;
+    fill: #fff;
+
+    &-wrapper {
+      position: relative;
+
+      &:after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 26px;
+        height: 26px;
+        border-radius: 100%;
+        background: #02FEA9;
+        opacity: 0;
+        filter: blur(10px);
+      }
+    }
+
+    &:after {
+      opacity: 0;
+    }
+  }
+}
