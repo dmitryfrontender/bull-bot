@@ -2,6 +2,10 @@
     padding-top: 156px;
     height: 100%;
 
+    * {
+	    font-family: 'Poppins', sans-serif;
+    }
+
     .logo {
         position: absolute;
         bottom: calc(100% - 95px);
@@ -123,6 +127,7 @@
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    z-index: 5;
 
     button {
         background: none;
@@ -226,7 +231,7 @@
     .button-wrapper {
         width: 100%;
         display: flex;
-        align-items: center;
+        // align-items: center;
         gap: 1px;
 
         .button {
@@ -249,12 +254,19 @@
             }
         }
 
+        .input-copy {
+            opacity: 0;
+            width: 0;
+            height: 0;
+            z-index: -1;
+            position: absolute;
+        }
+
         .button-copy {
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 0 0 20px 0;
             padding: 10px 15px;
             width: 54px;
-            height: 54px;
             background: #1b2b29;
 
             .svg-icon {
@@ -316,7 +328,7 @@
     }
 
     &-button {
-        border: 1px solid #01fea9;
+        border: 1px solid #00401e;
         border-radius: 20px;
         padding: 12px 20px;
         background: #052017;
@@ -440,7 +452,7 @@
 
         &-wrapper {
             padding: 10px;
-            background: #051f16;
+            background: #073123;
             border-radius: 99px;
             display: flex;
             align-items: center;
@@ -494,12 +506,20 @@
                 width: 16px;
                 height: 16px;
             }
+
+            @media screen and (max-width: 375px) {
+                flex-direction: column;
+                align-items: flex-start;
+            }
         }
     }
 
     &-buttons {
+        display: flex;
+        align-items: center;
         button {
             border-radius: 20px;
+            border: none;
             padding: 10px 15px;
             background: #01FEA9;
             font-weight: 500;
@@ -526,7 +546,8 @@
         &>.svg-icon {
             height: 14px;
             width: 7px;
-            margin: 0 5px;
+            margin: 0 5px 0 10px;
+            fill: none;
         }
     }
 }

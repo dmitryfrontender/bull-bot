@@ -197,6 +197,7 @@ input.placeholder, textarea.placeholder {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	font-family: "Poppins", sans-serif;
 	cursor: pointer;
 	transition: all 0.3s ease;
 }
@@ -307,6 +308,7 @@ input.placeholder, textarea.placeholder {
 	margin: 0 auto;
 	top: 89px;
 	padding-top: 89px;
+	padding-bottom: 15px;
 	text-align: center;
 }
 .popup-block.claim-popup .popup-block-wrapper:before {
@@ -828,6 +830,9 @@ input.placeholder, textarea.placeholder {
 	padding-top: 156px;
 	height: 100%;
 }
+.app-wrapper * {
+	font-family: "Poppins", sans-serif;
+}
 .app-wrapper .logo {
 	position: absolute;
 	bottom: calc(100% - 95px);
@@ -924,6 +929,7 @@ input.placeholder, textarea.placeholder {
 	display: flex;
 	align-items: center;
 	justify-content: flex-end;
+	z-index: 5;
 }
 .settings-block button {
 	background: none;
@@ -1012,7 +1018,6 @@ input.placeholder, textarea.placeholder {
 .block-w-button .button-wrapper {
 	width: 100%;
 	display: flex;
-	align-items: center;
 	gap: 1px;
 }
 .block-w-button .button-wrapper .button {
@@ -1033,12 +1038,18 @@ input.placeholder, textarea.placeholder {
 	width: 20px;
 	height: 18px;
 }
+.block-w-button .button-wrapper .input-copy {
+	opacity: 0;
+	width: 0;
+	height: 0;
+	z-index: -1;
+	position: absolute;
+}
 .block-w-button .button-wrapper .button-copy {
 	border: 1px solid rgba(255, 255, 255, 0.1);
 	border-radius: 0 0 20px 0;
 	padding: 10px 15px;
 	width: 54px;
-	height: 54px;
 	background: #1b2b29;
 }
 .block-w-button .button-wrapper .button-copy .svg-icon {
@@ -1090,7 +1101,7 @@ input.placeholder, textarea.placeholder {
 	margin-bottom: 18px;
 }
 .slider-block-button {
-	border: 1px solid #01fea9;
+	border: 1px solid #00401e;
 	border-radius: 20px;
 	padding: 12px 20px;
 	background: #052017;
@@ -1197,7 +1208,7 @@ input.placeholder, textarea.placeholder {
 }
 .tabs-content-block-item-wrapper {
 	padding: 10px;
-	background: #051f16;
+	background: #073123;
 	border-radius: 99px;
 	display: flex;
 	align-items: center;
@@ -1246,8 +1257,19 @@ input.placeholder, textarea.placeholder {
 	width: 16px;
 	height: 16px;
 }
+@media screen and (max-width: 375px) {
+	.tabs-content-block-description-info {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+}
+.tabs-content-block-buttons {
+	display: flex;
+	align-items: center;
+}
 .tabs-content-block-buttons button {
 	border-radius: 20px;
+	border: none;
 	padding: 10px 15px;
 	background: #01FEA9;
 	font-weight: 500;
@@ -1271,7 +1293,8 @@ input.placeholder, textarea.placeholder {
 .tabs-content-block-buttons > .svg-icon {
 	height: 14px;
 	width: 7px;
-	margin: 0 5px;
+	margin: 0 5px 0 10px;
+	fill: none;
 }
 
 .content-block {

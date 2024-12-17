@@ -8,6 +8,7 @@ $(document).ready(function(){
 	initSwiper();
 	tabsInit();
 	startMining();
+	copyToClipboard();
 });
 
 //functions
@@ -98,3 +99,18 @@ const tabsInit = () => {
 		});
 	});
 };
+
+const copyToClipboard = () => {
+	// Get the text field
+	var copyText = document.querySelector(".js-input-copy");
+	var copyButton = document.querySelector(".js-button-copy");
+
+	copyButton?.addEventListener('click', () => {
+		// Select the text field
+		copyText?.select();
+		copyText?.setSelectionRange(0, 99999); // For mobile devices
+
+		// Copy the text inside the text field
+		navigator.clipboard.writeText(copyText?.value);
+	});
+}
