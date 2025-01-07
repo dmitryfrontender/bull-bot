@@ -192,12 +192,21 @@ display: none;    position: fixed;
     background-size: 100% 100%;
 }
 
-
 .icon-two-users {
     display: inline-block;
     width: 24px;
     height: 24px;
     background-image: url(../images/icon-two-users.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% 100%;
+}
+
+.icon-bonus {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    background-image: url(../images/icon-bonus.png);
     background-repeat: no-repeat;
     background-position: center;
     background-size: 100% 100%;
