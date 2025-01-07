@@ -8,6 +8,7 @@ $(document).ready(function(){
 	initSwiper();
 	tabsInit();
 	startMining();
+	startTask();
 	copyToClipboard();
 });
 
@@ -55,8 +56,15 @@ const timerPlugFunction = () => {
 
 const timerFunction = () => {
 	$('#simple_mine_timer').syotimer({
-		date: new Date(2024, 11, 26, 20, 30, 0),
+		date: new Date(2025, 1, 7, 20, 30, 0),
 		layout: "hms",
+	});
+};
+
+const timerPopupFunction = () => {
+	$('#simple_popup_timer').syotimer({
+		date: new Date(2025, 0, 8, 20, 30, 0),
+		layout: "ms",
 	});
 };
 
@@ -67,6 +75,20 @@ const startMining = () => {
 		if (wrapperBlock.hasClass('mining-started')) return;
 		wrapperBlock.addClass('mining-started');
 		timerFunction();
+	});
+}
+
+const startTask = () => {
+	const startBtn = $('.js-start-task');
+	const defaultBlock = $('.default-state');
+	const startBlock = $('.start-state');
+
+	startBtn.on('click', () => {
+		if (defaultBlock.hasClass('active')) {
+			defaultBlock.removeClass('active');
+			startBlock.addClass('active');
+			timerPopupFunction();
+		}
 	});
 }
 
