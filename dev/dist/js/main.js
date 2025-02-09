@@ -10,6 +10,7 @@ $(document).ready(function(){
 	startMining();
 	startTask();
 	copyToClipboard();
+	roulette();
 });
 
 //functions
@@ -68,13 +69,40 @@ const timerPopupFunction = () => {
 	});
 };
 
+const advProcess = (block, timer, button) => {
+	const time = timer.text();
+	let counter = 0;
+
+	const interval = setInterval(() => {
+		counter++;
+
+		if (time - counter === 0) {
+			button.removeClass('inactive');
+
+			button.on('click', () => {
+				block.removeClass('active');
+			});
+
+			clearInterval(interval);
+		}
+
+		timer.text(time - counter);
+	}, 1000);
+}
+
 const startMining = () => {
 	const startBtn = $('.js-start-mining');
 	const wrapperBlock = $('.app-wrapper');
+	const popupBlock = $('.popup-adv-block');
+	const advTimer = $('.js-adv-timer');
+	const skipAdvButton = $('.js-close-ads');
 	startBtn.on('click', () => {
 		if (wrapperBlock.hasClass('mining-started')) return;
 		wrapperBlock.addClass('mining-started');
 		timerFunction();
+
+		popupBlock.addClass('active');
+		advProcess(popupBlock, advTimer, skipAdvButton);
 	});
 }
 
@@ -136,3 +164,129 @@ const copyToClipboard = () => {
 		navigator.clipboard.writeText(copyText?.value);
 	});
 }
+
+// ROULETTE
+const roulette = () => {
+	const roulette = $('#roulette');
+
+	if (!roulette.length) return;
+
+	const startButton = $('#startButton')[0];
+	const popupBlock = $('.popup-block');
+	const prizeImg = $('.js-prize-img');
+	const restartButton = $('.js-restart-roulette-btn');
+	const itemWidth = 133; // width + margins
+	let isSpinning = false;
+	let lastWinningElement = null;
+
+	function createPrizeItems() {
+		// Create four sets of prizes
+		const allPrizes = [...prizes, ...prizes, ...prizes, ...prizes];
+
+		// Empty the roulette
+		roulette.innerHTML = '';
+
+		// Append prize items to the roulette
+		allPrizes.forEach(prize => {
+			const item = `
+				<div class="prize-item" data-value="${prize.value}">
+					<div class="prize-item-wrapper">
+						<div class="prize-item-image">
+							<img src="${prize.url}" alt="${prize.title}">
+						</div>
+						<p>${prize.title}</p>
+					</div>
+				</div>
+			`;
+			roulette.append(item);
+		});
+	}
+
+	function centerRoulette() {
+		const containerWidth = $('.roulette-container')[0].offsetWidth;
+
+		const centerPosition = (containerWidth - itemWidth) / 2;
+
+		roulette[0].style.transition = 'none';
+		roulette[0].style.transform = `translateX(${centerPosition}px)`;
+		roulette[0].offsetHeight; // Force reflow
+	}
+
+	function determineWinner() {
+		const containerRect = $('.roulette-container')[0].getBoundingClientRect();
+		const centerX = containerRect.left + containerRect.width / 2;
+
+		let closestElement = null;
+		let minDistance = Infinity;
+
+		Array.from(roulette[0].children).forEach(element => {
+			const rect = element.getBoundingClientRect();
+			const elementCenterX = rect.left + rect.width / 2;
+			const distance = Math.abs(elementCenterX - centerX);
+
+			if (distance < minDistance) {
+				minDistance = distance;
+				closestElement = element;
+			}
+		});
+
+		return closestElement;
+	}
+
+	function spin() {
+		if (isSpinning) return;
+		isSpinning = true;
+		startButton.disabled = true;
+
+		// Remove previous winner class if exists
+		if (lastWinningElement) {
+			lastWinningElement.classList.remove('winner');
+		}
+
+		// Get current position
+		const currentTransform = getComputedStyle(roulette[0]).transform;
+		const matrix = new DOMMatrix(currentTransform);
+		const currentX = matrix.m41;
+
+		// Calculate spin distance
+		const spinDistance = (prizes.length * 2 + randomPrizeIndex) * itemWidth;
+
+		// Enable transition and spin
+		roulette[0].style.transition = 'transform 4s cubic-bezier(0.1, 0.7, 0.29, 0.99)';
+		roulette[0].style.transform = `translateX(${currentX - spinDistance}px)`;
+
+		// Handle spin completion
+		setTimeout(() => {
+			const winningElement = determineWinner();
+			if (winningElement) {
+				lastWinningElement = winningElement;
+				winningElement.classList.add('winner');
+				const prize = winningElement.dataset.value;
+
+				prizeImg.attr('src', prizes[prize].url);
+
+				popupBlock.addClass('active');
+
+				restartButton.on('click', () => {
+					popupBlock.removeClass('active');
+					centerRoulette();
+				});
+			}
+
+			isSpinning = false;
+			startButton.disabled = false;
+		}, 4000);
+	}
+
+	// Initialize
+	createPrizeItems();
+	centerRoulette();
+
+	// Event listeners
+	startButton.addEventListener('click', spin);
+	window.addEventListener('resize', () => {
+		if (!isSpinning) {
+			centerRoulette();
+		}
+	});
+};

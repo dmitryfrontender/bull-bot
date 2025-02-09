@@ -223,6 +223,11 @@ input.placeholder, textarea.placeholder {
 	background-size: 100% 100%;
 }
 
+.bonus .icon-two-users {
+	width: 32px;
+	height: 30px;
+}
+
 .icon-bonus {
 	display: inline-block;
 	width: 24px;
@@ -281,6 +286,11 @@ input.placeholder, textarea.placeholder {
 	background: linear-gradient(90deg, #0b4732 0%, #158660 100%);
 }
 
+.btn.inactive {
+	opacity: 0.4;
+	pointer-events: none;
+}
+
 .main {
 	width: 100%;
 	height: 100%;
@@ -298,6 +308,10 @@ input.placeholder, textarea.placeholder {
 	box-shadow: inset 0 1px 0 0 #044932;
 	background: #071311;
 	border: 1px solid rgba(4, 10, 8, 0.22);
+}
+
+.bonus .transparent-block {
+	padding: 15px 15px 140px;
 }
 
 .transparent-block:before {
@@ -332,6 +346,15 @@ input.placeholder, textarea.placeholder {
 	z-index: 2;
 }
 
+.bonus .transparent-block:after {
+	bottom: 110%;
+}
+
+.bonus .transparent-block:before {
+	display: none;
+}
+
+.popup-adv-block,
 .popup-block {
 	position: fixed;
 	z-index: 5;
@@ -349,7 +372,8 @@ input.placeholder, textarea.placeholder {
 	display: none;
 }
 
-.popup-block.active {
+.popup-block.active,
+.popup-adv-block.active {
 	display: flex;
 }
 
@@ -363,10 +387,49 @@ input.placeholder, textarea.placeholder {
 	position: relative;
 }
 
+.popup-adv-block .popup-block-wrapper {
+	padding: 20px;
+}
+
+.popup-adv-block-frame {
+	margin-bottom: 20px;
+	height: 531px;
+	align-self: stretch;
+	border-radius: 20px 20px 0px 0px;
+	opacity: 0.8;
+	overflow: hidden;
+	background: url(../images/adv-bg.png);
+}
+.popup-adv-block-frame > * {
+	width: 100%;
+	height: 100%;
+}
+
+.popup-adv-block-timer {
+	display: inline-flex;
+	padding: 10px 12px;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	border-radius: 15px;
+	background: #073123;
+	height: 50px;
+	width: 50px;
+	color: #FFF;
+	text-align: center;
+	font-size: 20px;
+	font-weight: 700;
+	position: absolute;
+	top: 30px;
+	right: 30px;
+	z-index: 1;
+}
+
 .popup-block-logo {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	position: relative;
 }
 
 .popup-block.claim-popup.active {
@@ -402,6 +465,7 @@ input.placeholder, textarea.placeholder {
 	transform: translateX(-48%);
 }
 
+.popup-adv-block h3,
 .popup-block h3 {
 	font-size: 15px;
 	text-align: center;
@@ -409,6 +473,7 @@ input.placeholder, textarea.placeholder {
 	margin-bottom: 10px;
 }
 
+.popup-adv-block h2,
 .popup-block h2 {
 	font-size: 18px;
 	letter-spacing: 0.01em;
@@ -547,6 +612,7 @@ input.placeholder, textarea.placeholder {
 	height: 16px;
 }
 
+.popup-adv-block .button,
 .popup-block .button {
 	border: 1px solid rgba(255, 255, 255, 0.1);
 	background: none;
@@ -1092,6 +1158,10 @@ input.placeholder, textarea.placeholder {
 	z-index: 5;
 }
 
+.bonus .settings-block {
+	top: 50px;
+}
+
 .settings-block button {
 	background: none;
 	border: none;
@@ -1484,6 +1554,30 @@ input.placeholder, textarea.placeholder {
 		align-items: flex-start;
 	}
 }
+.tabs-content-block-description .colored-text {
+	color: #01FEA9;
+	font-size: 18px;
+	font-weight: 700;
+	line-height: 20px;
+	display: flex;
+	align-items: center;
+	gap: 5px;
+}
+
+.tabs-content-block-description .colored-text-block {
+	display: flex;
+	padding: 3px 8px;
+	justify-content: center;
+	align-items: center;
+	border-radius: 6px;
+	background: #0A4A35;
+}
+
+.tabs-content-block-description .colored-text-block .svg-icon {
+	width: 16px;
+	height: 16px;
+}
+
 .tabs-content-block-buttons {
 	display: flex;
 	align-items: center;
@@ -1608,6 +1702,11 @@ input.placeholder, textarea.placeholder {
 	line-height: 12px;
 	color: rgba(255, 255, 255, 0.5);
 	gap: 5px;
+}
+
+.content-block-description-info-item img {
+	width: 16px;
+	height: 16px;
 }
 
 .content-block-description-info .description-icon {
@@ -2139,4 +2238,137 @@ textarea {
 	font-weight: 500;
 	line-height: 150%;
 	margin-top: 10px;
+}
+
+.roulette-container {
+	position: relative;
+	width: 100%;
+	height: 180px;
+	margin-bottom: 20px;
+}
+
+.roulette-wrapper {
+	display: flex;
+	position: absolute;
+	z-index: 2;
+	left: 0;
+	transition: none;
+}
+
+.prize-item {
+	display: flex;
+	width: 125px;
+	height: 130px;
+	margin: 0 4px;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
+	border-radius: 15px;
+	background-image: linear-gradient(to right bottom, #13563F 0%, rgba(11, 71, 50, 0) 80%);
+	padding: 1px;
+	opacity: 0.9;
+	-webkit-backdrop-filter: blur(15px);
+	        backdrop-filter: blur(15px);
+	overflow: hidden;
+}
+.prize-item.winner {
+	background-image: linear-gradient(to right bottom, #00BF7F 0%, rgba(11, 71, 50, 0) 80%);
+	box-shadow: 0px 8px 12px 0px rgba(7, 19, 17, 0.5);
+	-webkit-backdrop-filter: blur(15px);
+	        backdrop-filter: blur(15px);
+}
+.prize-item-wrapper {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 100%;
+	border-radius: 15px;
+	gap: 5px;
+	background: radial-gradient(113.76% 150.82% at 0% -0.91%, rgba(0, 0, 0, 0.4) 0%, #13563F 100%);
+}
+.prize-item-image {
+	width: 80px;
+	height: 80px;
+	flex-shrink: 0;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: #042419;
+	overflow: hidden;
+}
+.prize-item-image img {
+	width: 65px;
+}
+
+.prize-item.winner {
+	background-color: #4CAF50;
+}
+
+.center-marker {
+	position: absolute;
+	bottom: -10px;
+	left: 50%;
+	transform: translateX(-50%) rotate(-45deg);
+	height: 40px;
+	width: 40px;
+	z-index: 1;
+}
+
+.center-marker-icon {
+	width: 100%;
+	height: 100%;
+}
+
+.start-button {
+	width: 100%;
+	height: 55px;
+	padding: 10px 25px;
+	margin-bottom: 24px;
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
+	flex-shrink: 0;
+	border-radius: 20px;
+	background: #01FEA9;
+	color: #050908;
+	text-align: center;
+	font-size: 20px;
+	font-weight: 500;
+	position: relative;
+}
+.start-button .spin-count {
+	display: inline-flex;
+	padding: 10px 12px;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 45px;
+	height: 45px;
+	border-radius: 15px;
+	background: #073123;
+	position: absolute;
+	top: 50%;
+	right: 5px;
+	transform: translateY(-50%);
+	color: #FFF;
+	text-align: center;
+	font-size: 16px;
+	font-weight: 700;
+}
+
+.start-button:disabled {
+	pointer-events: none;
+	opacity: 0.5;
+}
+
+.prize-image {
+	position: absolute;
+	top: 54%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 70px;
 }

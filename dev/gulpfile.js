@@ -13,7 +13,7 @@ gulpif = require('gulp-if');
 
 connect.server({
 	root: 'dist',
-	port: 9090,
+	port: 9999,
 	livereload: true
 });
 
