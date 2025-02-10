@@ -180,8 +180,8 @@ const roulette = () => {
 	let lastWinningElement = null;
 
 	function createPrizeItems() {
-		// Create four sets of prizes
-		const allPrizes = [...prizes, ...prizes, ...prizes, ...prizes];
+		// Create five sets of prizes
+		const allPrizes = [...prizes, ...prizes, ...prizes, ...prizes, ...prizes];
 
 		// Empty the roulette
 		roulette.innerHTML = '';
@@ -205,7 +205,9 @@ const roulette = () => {
 	function centerRoulette() {
 		const containerWidth = $('.roulette-container')[0].offsetWidth;
 
-		const centerPosition = (containerWidth - itemWidth) / 2;
+		// const centerPosition = (containerWidth - itemWidth) / 2;
+		const oneSetWidth = itemWidth * prizes.length;
+		const centerPosition = (containerWidth - oneSetWidth * 2 - itemWidth) / 2;
 
 		roulette[0].style.transition = 'none';
 		roulette[0].style.transform = `translateX(${centerPosition}px)`;
